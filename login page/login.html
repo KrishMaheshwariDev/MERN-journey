@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <form action="" id="form">
+        <label for="">Name: </label>
+        <input type="text" name="" id="name">
+        <br>
+        <label for="">Email: </label>
+        <input type="email" id="email">
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+<script>
+    const form = document.querySelector("#form")
+    const nameInput = document.querySelector("#name")
+    const emailInput = document.querySelector("#email")
+
+    form.addEventListener("submit", function (e){
+        e.preventDefault()
+
+        const name = nameInput.value
+        const emial = emailInput.value
+
+        console.log("name: ", name)
+        console.log("email: ", emial)
+    })
+</script>
+</html>

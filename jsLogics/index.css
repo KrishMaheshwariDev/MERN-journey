@@ -1,0 +1,11 @@
+body{
+    background-color: darkblue;
+}
+
+div{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    /* text-decoration: dotted; */
+}
