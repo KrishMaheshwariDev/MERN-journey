@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promises</title>
+</head>
+<body>
+    <h2>Promise demo (just like she did to me)</h2>
+    <button id="loadbtn">Load Data</button>
+    <p id="output"></p>
+
+    <script>
+        function fetchData(){
+            return new Promise(function (resolve, reject){
+                setTimeout(() => {
+                    let success = false;
+
+                    if(success){
+                        resolve("omg server accepted you...");
+                    }
+                    else{
+                        reject("u got rejected nerd");
+                    }
+                }, 5000);
+            })
+        }
+
+        document.getElementById("loadbtn").addEventListener("click", function(){
+            document.getElementById("output").innerText = "Loading...";
+
+            fetchData()
+                .then(function (result){
+                    document.getElementById("output").innerText = result;
+                })
+                .catch(function (result){
+                    document.getElementById("output").innerText = result;
+                })
+        })
+    </script>
+</body>
+</html>

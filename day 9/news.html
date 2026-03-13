@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        <button class="topic" data-topic="AI">AI</button>
+        <button class="topic" data-topic="javascript">JavaScript</button>
+        <button class="topic" data-topic="startup">StartUp</button>
+        <button class="topic" data-topic="programming">Programming</button>
+    </p>
+    <hr>
+
+    <div id="news"></div>
+</body>
+
+<script>
+    const news = document.getElementById("news");
+
+    async function fetchNews(topic) {
+        const url = `https://hn.algolia.com/api/v1/search?query=${topic}`;
+        news.innerHTML = "Loading...";
+        try{
+            const response = await fetch(url);
+            const data = await response.json();
+            news.innerHTML = "";
+            showNews(data.hits);
+        }
+        catch(error){
+            news.innerHTML = "Error loading data: " + error;
+        }
+    }
+
+    function showNews(articles){
+
+        articles.forEach(element => {
+            const title = element.title || element.story_title;
+            const url = element.url || element.story_url;
+
+            if(!url) return;
+
+            const div = document.createElement("div");
+
+            div.innerHTML = `
+            <h3>${title}</h3>
+            <a href="${url}" target="_blank">Read</a>
+            <hr>
+            `;
+
+            news.appendChild(div);
+        });
+    }
+
+    const topics = document.querySelectorAll(".topic");
+    topics.forEach(btn => {
+        btn.addEventListener("click", () => {
+            fetchNews(btn.dataset.topic);
+        });
+    });
+
+    fetchNews("technology");
+
+</script>
+</html>
